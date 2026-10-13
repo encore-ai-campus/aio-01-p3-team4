@@ -2,13 +2,13 @@
 
 신고 창구와 문구를 받아 가상 메일을 보내고 접수번호를 반환합니다. 레포 루트에서 `docker compose up -d mailpit mailer`로 실행합니다.
 발송에 실패하면 편지함에 저장해 다시 보냅니다. 성공 뒤에는 접수번호가 적힌 가상 회신을 보냅니다.
-릴레이를 설정하면 가상 메일·회신 복사본을 실제 주소 한 곳으로도 보냅니다. 실패해도 가상 흐름과 접수번호에는 영향이 없습니다.
-복사본은 백그라운드에서 각각 최대 3번 시도합니다. 실제 기관에는 전달하지 않습니다.
+가상 메일과 회신은 Mailpit에 보내며, 릴레이(외부 메일 서버)를 설정했을 때만 복사본을 각각 한 통씩 지정 주소(`MAIL_RELAY_TO`)로도 보냅니다.
+복사본 발송은 백그라운드에서 각각 최대 3번 시도하며, 실패해도 가상 메일 발송과 접수번호에는 영향이 없습니다. 신고 창구의 실제 기관 주소로는 보내지 않습니다.
 
 | 입력·출력 / API | 내용 |
 |---|---|
-| 입력 | [Handoff](../../contracts/handoff.schema.json)의 `inputs`: [mailer 입력](../../contracts/mailer_input.schema.json) |
-| 출력 | [StageResult](../../contracts/stage_result.schema.json)의 `data`: [mailer 결과](../../contracts/mailer.schema.json) |
+| 입력 | [Handoff](../../contracts/handoff.schema.json)(총괄이 에이전트에게 보내는 일 요청 JSON)의 `inputs`: [mailer 입력](../../contracts/mailer_input.schema.json) |
+| 출력 | [StageResult](../../contracts/stage_result.schema.json)(에이전트가 돌려주는 결과 JSON)의 `data`: [mailer 결과](../../contracts/mailer.schema.json) |
 | `GET /health` | 서비스 상태를 반환합니다. |
 | `POST /run` | 신고 메일 발송 결과와 접수번호를 반환합니다. |
 | `GET /outbox` | 최근 발송 기록을 `items` 배열로 반환합니다. 본문은 제외합니다. |
@@ -33,8 +33,8 @@ python -m pytest -q  # 다른 터미널에서 같은 venv로 실행합니다.
 - SMTP: `SMTP_HOST`(기본 `mailpit`), `SMTP_PORT`(기본 `1025`)입니다. `REDIS_URL`은 장애 플래그 조회에 쓰입니다.
 - 릴레이: `MAIL_RELAY_HOST`, `MAIL_RELAY_PORT`(기본 `587`), `MAIL_RELAY_USER`, `MAIL_RELAY_PASSWORD`, `MAIL_RELAY_TO`입니다. HOST·USER·PASSWORD·TO를 모두 설정하면 STARTTLS로 보냅니다. `MAIL_RELAY_TIMEOUT_SEC` 기본값은 `8`초입니다.
 - 주소: `MAIL_SENDER`(기본 `minwon-guide@minwon.example`), `MAIL_CITIZEN`(기본 `citizen@minwon.example`), `CONTACTS_CSV`입니다. 기본 주소록은 [가상 담당자 CSV](../../database/seeds/mock_contacts.csv)입니다.
-- 저장·회신: `OUTBOX_PATH`(기본 `/tmp/minwon_mailer_outbox.json`), `OUTBOX_INTERVAL_SEC`(기본 `5`)입니다. `CONTRACTS_DIR`은 계약 폴더 경로입니다.
+- 저장·회신: `OUTBOX_PATH`(기본 `/tmp/minwon_mailer_outbox.json`), `OUTBOX_INTERVAL_SEC`(기본 `5`)입니다. `CONTRACTS_DIR`은 `contracts/`(서비스끼리 주고받는 JSON 모양을 정한 스키마 폴더)의 경로입니다.
 
 - `.example` 주소만 허용합니다. 다른 주소는 SMTP 연결 전에 `MAIL_BLOCKED`로 차단합니다. 실제 기관에는 보내지 않습니다.
-- 발송을 3번 시도한 뒤 실패하면 `retry`·`MAIL_SEND_FAILED`·`queued`를 반환합니다. 이미 보낸 `task_id`는 다시 보내지 않습니다.
+- 발송을 3번 시도한 뒤 실패하면 `retry`·`MAIL_SEND_FAILED`·`queued`를 반환합니다. 총괄이 Handoff에 넣어 보낸 작업 ID(`task_id`)로 발송 기록을 확인해, 이미 보낸 메일은 다시 보내지 않습니다.
 - 기본 편지함 파일은 컨테이너를 삭제하면 사라집니다. 여러 프로세스가 같은 파일을 공유하는 용도로 쓰지 않습니다.

@@ -18,7 +18,7 @@ docker compose ps                            # minwon-postgres, minwon-redis 둘
 
 ## 4. 보안 그룹
 
-데이터 서버 인바운드 규칙에 TCP 5432·6379를 추가하고, 소스는 앱 서버 공인 IP`/32`로만 엽니다. `0.0.0.0/0`(전체 공개)은 넣지 않습니다.
+AWS의 보안 그룹에서 데이터 서버 인바운드 규칙에 TCP 5432·6379를 추가하고, 소스는 `<앱 서버 공인 IP>/32`로만 엽니다. `0.0.0.0/0`(전체 공개)은 넣지 않습니다.
 
 ## 5. 앱 서버와 연결
 
@@ -37,10 +37,10 @@ DATA_HOST=<데이터 서버 IP>
 FRONTEND_BIND=0.0.0.0
 ```
 
-`COMPOSE_PROFILES`를 비워 두면 앱 서버에서는 PostgreSQL·Redis를 띄우지 않습니다. `DATA_HOST`는 장애 시험 스크립트가 DB 끊김을 낼 때 씁니다.
+`COMPOSE_PROFILES`를 비워 두면 앱 서버에서는 PostgreSQL·Redis를 띄우지 않습니다. `DATA_HOST`는 레포 루트의 `scripts/chaos_infra.sh`가 DB 끊김을 낼 때 씁니다.
 
 ## 알아 둘 것
 
-- EC2를 껐다 켜면 공인 IP가 바뀝니다. 앱 서버 `.env`의 주소와 보안 그룹 소스를 새 IP로 고칩니다. 탄력적 IP를 붙이면 바뀌지 않습니다.
+- EC2를 껐다 켜면 공인 IP가 바뀝니다. 앱 서버 `.env`의 주소와 보안 그룹 소스를 새 IP로 고칩니다. AWS의 탄력적 IP를 붙이면 바뀌지 않습니다.
 - DB 표 모양(`schema.sql`)이 바뀌면 이 폴더에서 `git pull` 후 `docker compose down -v && docker compose up -d --wait`로 다시 만듭니다. **기존 데이터가 지워집니다.**
 - "DB 끊김" 장애 시험은 이 서버를 끄지 않고, 앱 서버에서 이쪽으로 가는 연결만 잠깐 막습니다.

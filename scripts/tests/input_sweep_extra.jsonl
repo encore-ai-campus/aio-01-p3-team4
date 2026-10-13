@@ -1,0 +1,24 @@
+{"text": "서울 동작구 상도동 학교 앞 가로등이 너무 예뻐요", "expect": ["ask_what"]}
+{"text": "흑석동 가로등 새로 바꿔주셔서 감사합니다", "expect": ["ask_what"]}
+{"text": "사당동 쓰레기 버리는 요일이 언제예요?", "expect": ["ask_what", "out_of_scope"]}
+{"text": "노량진동 음식물 쓰레기 수거 시간 알려주세요", "expect": ["ask_what", "out_of_scope"]}
+{"text": "상도동 학교 앞 가로등 잘 켜져 있어요", "expect": ["ask_what"]}
+{"text": "대방동 보도블록 새로 깔아서 걷기 좋네요", "expect": ["ask_what"]}
+{"text": "어제 신고한 사당동 가로등 다 고쳐졌어요 감사해요", "expect": ["ask_what"]}
+{"text": "쓰레기 같은 정치인들 다 꺼져", "expect": ["ask_what"]}
+{"text": "흑석동에 쓰레기통 좀 더 설치해 주세요", "expect": ["ask_what", "out_of_scope"]}
+{"text": "동작구에 가로등 몇 개 있어요?", "expect": ["ask_what", "out_of_scope"]}
+{"text": "만약 상도동 가로등이 고장나면 누구한테 말해요?", "expect": ["ask_what"]}
+{"text": "흑석동 도로가 파손될까 봐 걱정돼요", "expect": ["ask_what"]}
+{"text": "상도동 학교 앞 가로등 고장 난 거 아니에요", "expect": ["ask_what"]}
+{"text": "사당동 쓰레기 무단투기 하면 벌금 얼마예요?", "expect": ["ask_what", "out_of_scope"]}
+{"text": "작년에 상도동 포트홀 있었는데 지금은 다 메워졌어요", "expect": ["ask_what"]}
+{"text": "소설 쓰는 중인데 주인공이 흑석동 가로등 아래서 울고 있어요", "expect": ["ask_what"]}
+{"text": "동작구 말고 관악구 신림동 가로등 고장", "expect": ["out_of_scope", "ask_location"]}
+{"text": "내 인생이 고장났어요 상도동에서", "expect": ["ask_what", "out_of_scope"]}
+{"text": "상도동 가로등 디자인 바꿔주세요", "expect": ["ask_what", "out_of_scope", "ask_category"]}
+{"text": "노량진역 앞 아스팔트 새로 깔았네요", "expect": ["ask_what"]}
+{"text": "상도동 학교 앞 가로등이 며칠째 안 들어와요", "expect": ["proceed"]}
+{"text": "흑석역 2번 출구 앞 도로에 구멍이 크게 났어요", "expect": ["proceed"]}
+{"text": "사당동 주민센터 옆 골목에 누가 쓰레기를 몰래 버려요", "expect": ["proceed"]}
+{"text": "노량진역 1번 출구 앞 보도블록이 들떠서 넘어질 뻔했어요", "expect": ["proceed"]}

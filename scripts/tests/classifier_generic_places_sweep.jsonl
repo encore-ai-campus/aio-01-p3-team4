@@ -1,0 +1,6 @@
+{"text": "흑석동 인도가 움푹 패였어요", "expect": ["proceed", "ask_location"]}
+{"text": "상도동 골목에 누가 쓰레기를 버려요", "expect": ["proceed", "ask_location"]}
+{"text": "사당동 횡단보도 앞 가로등이 꺼졌어요", "expect": ["proceed", "ask_location"]}
+{"text": "흑석동 버스정류장 옆 보도블록이 깨졌어요", "expect": ["proceed", "ask_location"]}
+{"text": "서울 동작구 상도동 석남역 앞 가로등 고장", "expect": ["ask_location"]}
+{"text": "노량진동 공원 놀이터 앞 가로등 고장", "expect": ["proceed", "ask_location"]}

@@ -1,0 +1,22 @@
+channel_id,sido,sigungu,category,name,org,method,url,jurisdiction,verified_at,source_url,active
+dj-all-01,서울특별시,동작구,all,동작구 민원상담 안내(새올전자민원창구 연결),동작구청,web,https://dongjak.go.kr/portal/main/contents.do?menuNo=200018,동작구,2026-10-07,https://dongjak.go.kr/portal/main/contents.do?menuNo=200018,true
+dj-streetlight-01,서울특별시,동작구,streetlight,동작구 도로관리과 대표전화(가로등 담당 연결),동작구청 도로관리과,phone,tel:02-820-4064,동작구,2026-10-07,https://www.dongjak.go.kr/portal/bbs/B0001244/deptGdc.do?deptId=DP_080300&menuNo=200793,true
+dj-road_damage-01,서울특별시,동작구,road_damage,동작구 도로관리과 대표전화(도로·보도 담당 연결),동작구청 도로관리과,phone,tel:02-820-4064,동작구,2026-10-07,https://www.dongjak.go.kr/portal/bbs/B0001244/deptGdc.do?deptId=DP_080300&menuNo=200793,true
+dj-illegal_dumping-01,서울특별시,동작구,illegal_dumping,동작구 쓰레기무단투기 신고방법 안내(온라인 접수 폼 아님),동작구청 청소행정과,web,https://www.dongjak.go.kr/portal/main/contents.do?menuNo=200600,동작구,2026-10-07,https://www.dongjak.go.kr/portal/main/contents.do?menuNo=200600,true
+dj-illegal_dumping-02,서울특별시,동작구,illegal_dumping,동작구 투기단속팀 전화(무단투기 신고방법 문의),동작구청 청소행정과 투기단속팀,phone,tel:02-820-1351,동작구,2026-10-07,https://www.dongjak.go.kr/portal/main/contents.do?menuNo=200600,true
+dj-all-02,서울특별시,동작구,all,동작구 당직실(야간·공휴일 문의),동작구청,phone,tel:02-820-1119,동작구,2026-10-07,https://www.dongjak.go.kr/dong/main/main.do?dongCd=11,true
+dj-dong-노량진1동-01,서울특별시,동작구,all,노량진1동 주민센터(가까운 접수 창구 · 민원 접수·문의),동작구 노량진1동 주민센터,phone,tel:02-820-2984,노량진1동,2026-10-12,https://www.dongjak.go.kr/dong/main/main.do?dongCd=01,true
+dj-dong-노량진2동-01,서울특별시,동작구,all,노량진2동 주민센터(가까운 접수 창구 · 민원 접수·문의),동작구 노량진2동 주민센터,phone,tel:02-820-2985,노량진2동,2026-10-12,https://www.dongjak.go.kr/dong/main/main.do?dongCd=02,true
+dj-dong-상도1동-01,서울특별시,동작구,all,상도1동 주민센터(가까운 접수 창구 · 민원 접수·문의),동작구 상도1동 주민센터,phone,tel:02-820-2986,상도1동,2026-10-12,https://www.dongjak.go.kr/dong/main/main.do?dongCd=03,true
+dj-dong-상도2동-01,서울특별시,동작구,all,상도2동 주민센터(가까운 접수 창구 · 민원 접수·문의),동작구 상도2동 주민센터,phone,tel:02-820-2987,상도2동,2026-10-12,https://www.dongjak.go.kr/dong/main/main.do?dongCd=04,true
+dj-dong-상도3동-01,서울특별시,동작구,all,상도3동 주민센터(가까운 접수 창구 · 민원 접수·문의),동작구 상도3동 주민센터,phone,tel:02-820-2988,상도3동,2026-10-12,https://www.dongjak.go.kr/dong/main/main.do?dongCd=05,true
+dj-dong-상도4동-01,서울특별시,동작구,all,상도4동 주민센터(가까운 접수 창구 · 민원 접수·문의),동작구 상도4동 주민센터,phone,tel:02-820-2989,상도4동,2026-10-12,https://www.dongjak.go.kr/dong/main/main.do?dongCd=06,true
+dj-dong-흑석동-01,서울특별시,동작구,all,흑석동 주민센터(가까운 접수 창구 · 민원 접수·문의),동작구 흑석동 주민센터,phone,tel:02-820-2990,흑석동,2026-10-12,https://www.dongjak.go.kr/dong/main/main.do?dongCd=07,true
+dj-dong-사당1동-01,서울특별시,동작구,all,사당1동 주민센터(가까운 접수 창구 · 민원 접수·문의),동작구 사당1동 주민센터,phone,tel:02-820-2991,사당1동,2026-10-12,https://www.dongjak.go.kr/dong/main/main.do?dongCd=08,true
+dj-dong-사당2동-01,서울특별시,동작구,all,사당2동 주민센터(가까운 접수 창구 · 민원 접수·문의),동작구 사당2동 주민센터,phone,tel:02-820-2992,사당2동,2026-10-12,https://www.dongjak.go.kr/dong/main/main.do?dongCd=09,true
+dj-dong-사당3동-01,서울특별시,동작구,all,사당3동 주민센터(가까운 접수 창구 · 민원 접수·문의),동작구 사당3동 주민센터,phone,tel:02-820-2993,사당3동,2026-10-12,https://www.dongjak.go.kr/dong/main/main.do?dongCd=10,true
+dj-dong-사당4동-01,서울특별시,동작구,all,사당4동 주민센터(가까운 접수 창구 · 민원 접수·문의),동작구 사당4동 주민센터,phone,tel:02-820-2994,사당4동,2026-10-12,https://www.dongjak.go.kr/dong/main/main.do?dongCd=11,true
+dj-dong-사당5동-01,서울특별시,동작구,all,사당5동 주민센터(가까운 접수 창구 · 민원 접수·문의),동작구 사당5동 주민센터,phone,tel:02-820-2995,사당5동,2026-10-12,https://www.dongjak.go.kr/dong/main/main.do?dongCd=12,true
+dj-dong-대방동-01,서울특별시,동작구,all,대방동 주민센터(가까운 접수 창구 · 민원 접수·문의),동작구 대방동 주민센터,phone,tel:02-820-2996,대방동,2026-10-12,https://www.dongjak.go.kr/dong/main/main.do?dongCd=13,true
+dj-dong-신대방1동-01,서울특별시,동작구,all,신대방1동 주민센터(가까운 접수 창구 · 민원 접수·문의),동작구 신대방1동 주민센터,phone,tel:02-820-2997,신대방1동,2026-10-12,https://www.dongjak.go.kr/dong/main/main.do?dongCd=14,true
+dj-dong-신대방2동-01,서울특별시,동작구,all,신대방2동 주민센터(가까운 접수 창구 · 민원 접수·문의),동작구 신대방2동 주민센터,phone,tel:02-820-2998,신대방2동,2026-10-12,https://www.dongjak.go.kr/dong/main/main.do?dongCd=15,true

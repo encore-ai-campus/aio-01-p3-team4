@@ -1,0 +1,43 @@
+{
+  "task_id": "job-0012",
+  "author": "classifier",
+  "status": "success",
+  "data": {
+    "category": "streetlight",
+    "confidence": 0.9,
+    "region": {
+      "sido": "서울특별시",
+      "sigungu": "동작구",
+      "dong": "상도동",
+      "place_text": "상도동 주민센터 앞"
+    },
+    "details": {
+      "location_detail": "상도동 주민센터 앞",
+      "occurred_at": "어제",
+      "has_photo": false
+    },
+    "missing": [],
+    "questions": [],
+    "recovery": {
+      "attempts": [
+        {
+          "model": "gpt-6-luna",
+          "error_type": "JSONDecodeError",
+          "elapsed_ms": 1240,
+          "started_at": "2026-10-12T09:00:00Z",
+          "evidence": {
+            "broken": "응답: 분류 결과를 문장으로 설명합니다 · JSONDecodeError"
+          }
+        }
+      ],
+      "recovered_by": "gpt-5.4-mini",
+      "elapsed_ms": 2890,
+      "started_at": "2026-10-12T09:00:01.240Z"
+    },
+    "evidence": {
+      "fixed": "gpt-5.4-mini · streetlight · 상도동"
+    }
+  },
+  "failure": null,
+  "incident_id": "incident-internal-recovery"
+}

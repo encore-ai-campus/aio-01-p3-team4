@@ -1,0 +1,24 @@
+{
+  "task_id": "job-sample-illegal_dumping",
+  "author": "classifier",
+  "status": "success",
+  "data": {
+    "category": "illegal_dumping",
+    "confidence": 0.9,
+    "region": {
+      "sido": "서울특별시",
+      "sigungu": "동작구",
+      "dong": "상도동",
+      "place_text": "상도동 주민센터 앞"
+    },
+    "details": {
+      "location_detail": "상도동 주민센터 앞",
+      "occurred_at": "어제",
+      "has_photo": false
+    },
+    "missing": [],
+    "questions": []
+  },
+  "failure": null,
+  "incident_id": null
+}

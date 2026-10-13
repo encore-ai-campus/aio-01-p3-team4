@@ -1,0 +1,74 @@
+name: chaos
+on:
+  push:
+    paths: ['src/chaos/**', 'contracts/**', 'database/**', 'docker-compose.yml', '.dockerignore', '.gitattributes', 'scripts/lint_chaos.sh', 'scripts/tests/test_lint_chaos.sh', 'scripts/deploy_*.sh', 'scripts/tests/test_deploy_*.sh', 'scripts/tests/package*.json', 'scripts/tests/test_*workflow.mjs', '.github/workflows/chaos.yml', '.github/actions/**']
+  pull_request:
+    paths: ['src/chaos/**', 'contracts/**', 'database/**', 'docker-compose.yml', '.dockerignore', '.gitattributes', 'scripts/lint_chaos.sh', 'scripts/tests/test_lint_chaos.sh', 'scripts/deploy_*.sh', 'scripts/tests/test_deploy_*.sh', 'scripts/tests/package*.json', 'scripts/tests/test_*workflow.mjs', '.github/workflows/chaos.yml', '.github/actions/**']
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: src/chaos
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: pip install -r requirements.txt
+      - run: python -m pytest -q
+      - name: Lint chaos owned Python files
+        run: |
+          pip install ruff==0.16.10 shellcheck-py==0.11.0.1
+          bash ../../scripts/lint_chaos.sh
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Test workflow gates and notification results
+        working-directory: scripts/tests
+        run: npm ci && npm test
+      - name: Check deployment scripts
+        working-directory: .
+        run: |
+          bash -n scripts/deploy_*.sh scripts/lint_chaos.sh scripts/tests/test_deploy_chaos.sh scripts/tests/test_lint_chaos.sh
+          shellcheck scripts/deploy_*.sh scripts/lint_chaos.sh scripts/tests/test_deploy_chaos.sh scripts/tests/test_lint_chaos.sh
+          bash scripts/tests/test_deploy_chaos.sh chaos
+          bash scripts/tests/test_lint_chaos.sh
+      - name: Check workflow
+        working-directory: .
+        run: docker run --rm -v "$PWD:/repo" -w /repo rhysd/actionlint:1.7.7 -shellcheck= -pyflakes= .github/workflows/chaos.yml
+      - name: Build chaos image
+        working-directory: .
+        run: docker compose build chaos
+
+  deploy:
+    needs: [test]
+    if: needs.test.result == 'success' && github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: chaos
+    steps:
+      - uses: actions/checkout@v4
+        with: {persist-credentials: false}
+      - name: Deploy this checkout to EC2
+        env:
+          AWS_HOST: ${{ secrets.AWS_HOST }}
+          AWS_USER: ${{ secrets.AWS_USER }}
+          AWS_SSH_PRIVATE_KEY: ${{ secrets.AWS_SSH_PRIVATE_KEY }}
+          AWS_SSH_KNOWN_HOSTS: ${{ secrets.AWS_SSH_KNOWN_HOSTS }}
+        run: bash scripts/deploy_service.sh chaos
+
+  notify:
+    needs: [test, deploy]
+    if: always() && github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/discord-notify
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          service: chaos
+          stage: 테스트·배포
+          result: ${{ contains(needs.*.result, 'failure') && 'failure' || contains(needs.*.result, 'cancelled') && 'cancelled' || (needs.test.result == 'success' && needs.deploy.result == 'success') && 'success' || 'failure' }}

@@ -1,0 +1,12 @@
+{
+  "name": "minwon-ci-tests",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test test_services_workflow.mjs test_services_paths_workflow.mjs"
+  },
+  "devDependencies": {
+    "@actions/expressions": "0.3.61",
+    "yaml": "2.8.3"
+  }
+}

@@ -1,0 +1,161 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://minwon.local/contracts/common.schema.json",
+  "$defs": {
+    "evidence": {
+      "type": "object", "additionalProperties": false, "minProperties": 1,
+      "description": "서비스가 관측한 장애와 처리 결과. 개인정보는 마스킹하고 실험 고정 가짜 번호만 원문 허용.",
+      "properties": {
+        "broken": {"type": "string", "minLength": 1, "maxLength": 500},
+        "fixed": {"type": "string", "minLength": 1, "maxLength": 500}
+      }
+    },
+    "category": {
+      "enum": [
+        "streetlight",
+        "road_damage",
+        "illegal_dumping",
+        "out_of_scope"
+      ]
+    },
+    "region": {
+      "type": "object",
+      "properties": {
+        "sido": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "sigungu": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "dong": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "place_text": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "sido",
+        "sigungu",
+        "dong",
+        "place_text"
+      ],
+      "additionalProperties": false
+    },
+    "details": {
+      "type": "object",
+      "properties": {
+        "location_detail": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "occurred_at": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "has_photo": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "location_detail",
+        "occurred_at",
+        "has_photo"
+      ],
+      "additionalProperties": false
+    },
+    "channel": {
+      "type": "object",
+      "properties": {
+        "channel_id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "org": {
+          "type": "string"
+        },
+        "method": {
+          "enum": [
+            "web",
+            "app",
+            "phone"
+          ]
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "jurisdiction": {
+          "type": "string"
+        },
+        "verified_at": {
+          "type": "string",
+          "format": "date"
+        },
+        "source_url": {
+          "type": "string",
+          "format": "uri"
+        }
+      },
+      "required": [
+        "channel_id",
+        "name",
+        "org",
+        "method",
+        "url",
+        "jurisdiction",
+        "verified_at",
+        "source_url"
+      ],
+      "additionalProperties": false
+    },
+    "failure": {
+      "enum": [
+        null,
+        "LLM_OUTPUT_INVALID",
+        "NEEDS_MORE_INFO",
+        "OUT_OF_SCOPE",
+        "NO_CHANNEL",
+        "LINK_DEAD",
+        "NOT_OFFICIAL",
+        "STALE_INFO",
+        "PII_IN_DRAFT",
+        "DRAFT_MISMATCH",
+        "INJECTION_BLOCKED",
+        "SERVICE_UNAVAILABLE",
+        "MAIL_SEND_FAILED",
+        "MAIL_BLOCKED"
+      ]
+    },
+    "field": {
+      "enum": [
+        "category",
+        "location_detail",
+        "occurred_at",
+        "has_photo",
+        "pii"
+      ]
+    }
+  }
+}

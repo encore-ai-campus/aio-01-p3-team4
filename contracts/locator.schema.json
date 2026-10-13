@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://minwon.local/contracts/locator.schema.json",
+  "type": "object",
+  "properties": {
+    "channels": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/channel"
+      },
+      "maxItems": 5
+    },
+    "fallback_level": {
+      "enum": [
+        "district",
+        "city",
+        "national"
+      ]
+    }
+  },
+  "required": [
+    "channels",
+    "fallback_level"
+  ],
+  "additionalProperties": false
+}

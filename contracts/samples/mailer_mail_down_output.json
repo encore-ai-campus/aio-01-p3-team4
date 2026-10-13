@@ -1,0 +1,19 @@
+{
+  "task_id": "job-sample-mail_down",
+  "author": "mailer",
+  "status": "retry",
+  "data": {
+    "message_id": "<job-sample-mail_down.report@minwon.example>",
+    "to": "epeople-desk@minwon.example",
+    "dept": "국민신문고 민원처리과(가상)",
+    "officer": "김가상 주무관",
+    "status": "queued",
+    "receipt_no": null,
+    "attempts": 3,
+    "evidence": {
+      "broken": "메일 발송 실패 · 1차 시도 ConnectionRefusedError"
+    }
+  },
+  "failure": "MAIL_SEND_FAILED",
+  "incident_id": "incident-mail_down"
+}

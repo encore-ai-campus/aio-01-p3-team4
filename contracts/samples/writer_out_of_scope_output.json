@@ -1,0 +1,13 @@
+{
+  "task_id": "job-sample-out_of_scope",
+  "author": "writer",
+  "status": "success",
+  "data": {
+    "title": "지원 범위 밖 문의",
+    "body": "공식 창구에서 지원 범위를 확인해 주세요.",
+    "fill_in": [],
+    "removed_pii": []
+  },
+  "failure": null,
+  "incident_id": null
+}

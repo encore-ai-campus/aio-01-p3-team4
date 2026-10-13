@@ -1,0 +1,73 @@
+import { act, cleanup, fireEvent, render, screen } from '@testing-library/react';
+import { afterEach, beforeEach, expect, it, vi } from 'vitest';
+import App from '../src/citizen/App';
+import { MockApi } from '../src/api/mock';
+import { exampleQuestions } from '../src/lib/failures';
+import { seek } from '../src/citizen/components/hero/seek';
+import { LOOP } from '../src/citizen/components/hero/scenario';
+beforeEach(() => { window.history.replaceState({}, '', '/?hero=0#/'); });
+afterEach(() => { localStorage.clear(); cleanup(); vi.useRealTimers(); vi.restoreAllMocks(); });
+async function submit(text = exampleQuestions[0].text) {
+  fireEvent.change(screen.getByLabelText('민원 설명'), { target: { value: text } });
+  await act(async () => { fireEvent.click(screen.getByRole('button', { name: '신고 창구 찾기' })); });
+  await act(async () => { await vi.advanceTimersByTimeAsync(8000); });
+}
+it('500자 제한·예시 채우기와 히어로 첫 프레임=끝 프레임', () => {
+  render(<App api={new MockApi()}/>);
+  const button = screen.getByRole('button', { name: '신고 창구 찾기' });
+  fireEvent.change(screen.getByLabelText('민원 설명'), { target: { value: '가'.repeat(501) } });
+  expect(button.hasAttribute('disabled')).toBe(true);
+  expect(screen.getByText('501 / 500').className).toContain('danger');
+  fireEvent.click(screen.getByRole('button', { name: /^가로등/ }));
+  expect(screen.getByLabelText<HTMLTextAreaElement>('민원 설명').value).toBe(exampleQuestions[0].text);
+  expect(button.hasAttribute('disabled')).toBe(false);
+  expect(seek(0)).toEqual(seek(LOOP));
+});
+it('가로등 결과·공식 창구·편집·복사와 가상 발송은 수정한 문구를 사용한다', async () => {
+  vi.useFakeTimers(); const api = new MockApi(), send = vi.spyOn(api, 'sendJob');
+  const copy = vi.fn().mockResolvedValue(undefined); Object.defineProperty(navigator, 'clipboard', { configurable: true, value: { writeText: copy } });
+  render(<App api={api}/>); await submit();
+  expect(screen.getByRole('heading', { name: '국민신문고' })).toBeTruthy();
+  expect(screen.getByRole('heading', { name: '신고 문구 초안' })).toBeTruthy();
+  fireEvent.change(screen.getByLabelText('제목'), { target: { value: '고친 제목' } });
+  fireEvent.change(screen.getByLabelText('본문'), { target: { value: '고친 본문' } });
+  await act(async () => { fireEvent.click(screen.getByRole('button', { name: '복사' })); });
+  await act(async () => { window.location.hash = '#/guide'; window.dispatchEvent(new HashChangeEvent('hashchange')); });
+  await act(async () => { window.location.hash = '#/'; window.dispatchEvent(new HashChangeEvent('hashchange')); });
+  expect(screen.getByLabelText<HTMLInputElement>('제목').value).toBe('고친 제목');
+  expect(copy).toHaveBeenCalledWith('고친 제목\n\n고친 본문');
+  expect(screen.getByRole('button', { name: '복사됨' })).toBeTruthy();
+  await act(async () => { fireEvent.click(screen.getByRole('button', { name: /로그인하고 보내기|내 계정으로 보내기/ })); });
+  expect(send).toHaveBeenCalledWith(expect.any(String), { title: '고친 제목', body: '고친 본문', citizen: { name: '김민원', email: 'minwon.kim@minwon.example' } });
+  await act(async () => { await vi.advanceTimersByTimeAsync(7000); });
+  expect(screen.getByRole('button', { name: '보냈어요' })).toBeTruthy();
+  expect(screen.getByText(/접수번호/, { selector: '.receipt > .badge' })).toBeTruthy();
+});
+it('위치 없는 민원은 빈 답변을 막고 결과 상단에 보정 답변을 표시한다', async () => {
+  vi.useFakeTimers(); const api = new MockApi(), job = await api.createJob('가로등이 꺼졌어요');
+  job.state.last_result!.data.questions = [{ id: 'location_detail', field: 'location_detail', text: '위치를 알려 주세요' }];
+  vi.spyOn(api, 'createJob').mockResolvedValueOnce(job);
+  const answerJob = api.answerJob.bind(api);
+  vi.spyOn(api, 'answerJob').mockImplementation((id, answers) => answerJob(id, { q1: answers.location_detail }));
+  render(<App api={api}/>); await submit('가로등이 꺼졌어요');
+  expect(document.querySelector('.question-answers')).toBeNull();
+  const button = screen.getByRole('button', { name: '답변 보내기' });
+  expect(button.hasAttribute('disabled')).toBe(true);
+  fireEvent.change(screen.getByRole('textbox'), { target: { value: '흑석동' } });
+  await act(async () => { fireEvent.click(button); });
+  await act(async () => { await vi.advanceTimersByTimeAsync(8000); });
+  expect(screen.getByRole('heading', { name: '공식 신고 창구' })).toBeTruthy();
+  const heading = screen.getByRole('heading', { level: 1, name: '“가로등이 꺼졌어요”' });
+  expect(heading.nextElementSibling?.textContent).toBe('추가 답변 · 위치: “흑석동”');
+  fireEvent.click(screen.getByRole('button', { name: '다시 묻기' }));
+  await submit();
+  expect(document.querySelector('.question-answers')).toBeNull();
+});
+it('첫 화면 진행 순서·지원 범위·공통 푸터가 보인다', () => {
+  render(<App api={new MockApi()}/>);
+  for (const name of ['이렇게 진행돼요', '지금은 동작구의 민원 세 가지만 안내해요']) expect(screen.getByRole('heading', { name })).toBeTruthy();
+  for (const name of ['민원 분류', '창구 검증', '문구 작성', '접수 안내']) expect(screen.getByText(name, { selector: '.route-steps strong' })).toBeTruthy();
+  expect(screen.getByText('실제 접수는 각 기관의 공식 창구에서 직접 해 주세요.')).toBeTruthy();
+  expect(screen.getByText('가상 발송은 시연용 기능이라 실제 기관에는 전달되지 않아요.')).toBeTruthy();
+  expect(screen.queryByRole('link', { name: '푸터: 운영 현황' })).toBeNull();
+});

@@ -1,0 +1,39 @@
+{
+  "task_id": "job-sample-blocked",
+  "from": "supervisor",
+  "to": "mailer",
+  "objective": "확인된 신고 문구를 가상 담당자에게 발송",
+  "inputs": {
+    "category": "streetlight",
+    "region": {
+      "sido": "서울특별시",
+      "sigungu": "동작구",
+      "dong": "상도동",
+      "place_text": "상도동 주민센터 앞"
+    },
+    "channel": {
+      "channel_id": "national-all-01",
+      "name": "국민신문고",
+      "org": "국민권익위원회",
+      "method": "web",
+      "url": "https://www.epeople.go.kr/",
+      "jurisdiction": "전국",
+      "verified_at": "2026-10-06",
+      "source_url": "https://www.epeople.go.kr/"
+    },
+    "draft": {
+      "title": "동작구 상도동 가로등 고장 신고",
+      "body": "상도동 주민센터 앞에서 어제 가로등 고장 문제를 확인했습니다. 확인과 조치를 부탁드립니다."
+    },
+    "citizen": {
+      "email": "citizen@minwon.test"
+    }
+  },
+  "constraints": [
+    "실제 기관 주소로 보내지 말 것",
+    "가상 주소(.example)만 사용할 것"
+  ],
+  "attempt": 1,
+  "last_failure": null,
+  "memory_refs": []
+}

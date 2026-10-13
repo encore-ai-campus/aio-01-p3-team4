@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://minwon.local/contracts/verifier_input.schema.json",
+  "type": "object",
+  "properties": {
+    "mode": {
+      "enum": [
+        "channel",
+        "draft"
+      ]
+    },
+    "category": {
+      "$ref": "common.schema.json#/$defs/category"
+    },
+    "region": {
+      "$ref": "common.schema.json#/$defs/region"
+    },
+    "channels": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/channel"
+      }
+    },
+    "draft": {
+      "$ref": "writer.schema.json"
+    }
+  },
+  "required": [
+    "mode",
+    "category",
+    "region"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "mode": {
+            "const": "channel"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "channels"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "mode": {
+            "const": "draft"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "draft"
+        ]
+      }
+    }
+  ]
+}

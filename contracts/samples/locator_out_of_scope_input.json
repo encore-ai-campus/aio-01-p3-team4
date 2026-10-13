@@ -1,0 +1,23 @@
+{
+  "task_id": "job-sample-out_of_scope",
+  "from": "supervisor",
+  "to": "locator",
+  "objective": "공식 신고 창구 탐색",
+  "inputs": {
+    "category": "out_of_scope",
+    "region": {
+      "sido": "서울특별시",
+      "sigungu": "동작구",
+      "dong": "상도동",
+      "place_text": "상도동 주민센터 앞"
+    },
+    "exclude_channel_ids": []
+  },
+  "constraints": [
+    "개인정보를 묻지 말 것",
+    "공식 출처만 사용할 것"
+  ],
+  "attempt": 1,
+  "last_failure": null,
+  "memory_refs": []
+}

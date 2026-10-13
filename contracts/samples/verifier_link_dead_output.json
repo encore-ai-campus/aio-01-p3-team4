@@ -1,0 +1,59 @@
+{
+  "task_id": "job-sample-link_dead",
+  "author": "verifier",
+  "status": "failed",
+  "data": {
+    "verdict": "FAIL",
+    "checks": [
+      {
+        "name": "official",
+        "ok": true,
+        "detail": "national-all-01 · 공식 주소"
+      },
+      {
+        "name": "link",
+        "ok": false,
+        "detail": "national-all-01 · 연결 실패(ConnectError)"
+      },
+      {
+        "name": "fresh",
+        "ok": true,
+        "detail": "national-all-01 · 확인일 90일 이내"
+      },
+      {
+        "name": "scope",
+        "ok": true,
+        "detail": "national-all-01 · 지역·유형 일치"
+      },
+      {
+        "name": "official",
+        "ok": true,
+        "detail": "national-all-02 · 공식 주소"
+      },
+      {
+        "name": "link",
+        "ok": false,
+        "detail": "national-all-02 · 연결 실패(ConnectError)"
+      },
+      {
+        "name": "fresh",
+        "ok": true,
+        "detail": "national-all-02 · 확인일 90일 이내"
+      },
+      {
+        "name": "scope",
+        "ok": true,
+        "detail": "national-all-02 · 지역·유형 일치"
+      }
+    ],
+    "reasons": [
+      "LINK_DEAD"
+    ],
+    "passed_channel_ids": [],
+    "evidence": {
+      "broken": "국민신문고 · https://closed.epeople.go.kr/ · national-all-01 · 연결 실패(ConnectError); 안전신문고 · https://closed.safetyreport.go.kr/ · national-all-02 · 연결 실패(ConnectError)"
+    }
+  },
+  "failure": "LINK_DEAD",
+  "incident_id": null
+}

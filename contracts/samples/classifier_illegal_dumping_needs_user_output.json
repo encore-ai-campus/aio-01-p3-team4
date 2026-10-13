@@ -1,0 +1,32 @@
+{
+  "task_id": "job-sample-illegal_dumping_needs_user",
+  "author": "classifier",
+  "status": "needs_user",
+  "data": {
+    "category": "illegal_dumping",
+    "confidence": 0.9,
+    "region": {
+      "sido": null,
+      "sigungu": null,
+      "dong": null,
+      "place_text": "집 앞"
+    },
+    "details": {
+      "location_detail": null,
+      "occurred_at": null,
+      "has_photo": null
+    },
+    "missing": [
+      "location_detail"
+    ],
+    "questions": [
+      {
+        "id": "q1",
+        "text": "위치(동·도로명·근처 건물)를 알려 주세요",
+        "field": "location_detail"
+      }
+    ]
+  },
+  "failure": "NEEDS_MORE_INFO",
+  "incident_id": null
+}

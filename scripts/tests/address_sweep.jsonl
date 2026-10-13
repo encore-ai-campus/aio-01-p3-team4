@@ -1,0 +1,6 @@
+{"text": "서울시 동작구 흑성동 가로등이 나갓어요", "expect": "ask_location"}
+{"text": "서울시 동작구 오류동 노량진 역 1번 출구 앞에 가로등이 나갓어요", "expect": "ask_location"}
+{"text": "서울 동작구 상두동 주민센터 앞 가로등 고장", "expect": "ask_location"}
+{"text": "서울 동작구 오류동 가로등 고장", "expect": "ask_location"}
+{"text": "서울 동작구 역삼동 학교 앞 가로등 고장", "expect": "ask_location"}
+{"text": "서울 동작구 신림동 노량진역 1번 출구 앞 가로등 고장", "expect": "ask_location"}

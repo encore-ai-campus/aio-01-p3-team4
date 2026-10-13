@@ -1,0 +1,6 @@
+channel_id,dept,officer,email
+national-all-01,국민신문고 민원처리과(가상),김가상 주무관,epeople-desk@minwon.example
+national-all-02,안전신문고 신고처리과(가상),이가상 주무관,safety-desk@minwon.example
+dongjak-streetlight-01,동작구청 가로등 담당(가상),박가상 주무관,dongjak-streetlight@minwon.example
+dongjak-road_damage-01,동작구청 도로관리과(가상),최가상 주무관,dongjak-road@minwon.example
+dongjak-illegal_dumping-01,동작구청 청소행정과(가상),정가상 주무관,dongjak-clean@minwon.example

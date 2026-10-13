@@ -1,0 +1,28 @@
+{
+  "task_id": "job-sample-stale_info",
+  "author": "verifier",
+  "status": "success",
+  "data": {
+    "verdict": "PASS",
+    "checks": [
+      {
+        "name": "stale_info",
+        "ok": false,
+        "detail": "STALE_INFO"
+      }
+    ],
+    "reasons": [
+      "STALE_INFO"
+    ],
+    "passed_channel_ids": [
+      "national-all-01",
+      "national-all-02"
+    ],
+    "evidence": {
+      "broken": "국민신문고 · https://www.epeople.go.kr/ · national-all-01 · 확인일 2020-01-01 (2471일 전, 기준 90일)",
+      "fixed": "국민신문고 · https://www.epeople.go.kr/ · 확인 필요 표시를 붙여 안내; 안전신문고 · https://www.safetyreport.go.kr/ · 검증 통과"
+    }
+  },
+  "failure": "STALE_INFO",
+  "incident_id": null
+}

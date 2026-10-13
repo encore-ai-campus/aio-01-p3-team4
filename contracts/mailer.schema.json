@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://minwon.local/contracts/mailer.schema.json",
+  "type": "object",
+  "properties": {
+    "evidence": {"$ref": "common.schema.json#/$defs/evidence"},
+    "message_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "to": {
+      "type": "string",
+      "description": "신고 메일 받는 주소. 차단일 때만 거부된 주소."
+    },
+    "dept": {
+      "type": "string"
+    },
+    "officer": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "sent",
+        "queued",
+        "blocked"
+      ]
+    },
+    "receipt_no": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^\\d{4}-\\d{4}-\\d{4}$"
+    },
+    "attempts": {
+      "type": "integer",
+      "minimum": 0
+    }
+  },
+  "required": [
+    "message_id",
+    "to",
+    "dept",
+    "officer",
+    "status",
+    "receipt_no",
+    "attempts"
+  ],
+  "additionalProperties": false
+}

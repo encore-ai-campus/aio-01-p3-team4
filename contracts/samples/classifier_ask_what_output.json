@@ -1,0 +1,32 @@
+{
+  "task_id": "job-ask-what",
+  "author": "classifier",
+  "status": "needs_user",
+  "data": {
+    "category": null,
+    "confidence": 0.0,
+    "region": {
+      "sido": null,
+      "sigungu": null,
+      "dong": null,
+      "place_text": null
+    },
+    "details": {
+      "location_detail": null,
+      "occurred_at": null,
+      "has_photo": null
+    },
+    "missing": [
+      "category"
+    ],
+    "questions": [
+      {
+        "id": "q_what",
+        "text": "어떤 불편인지 한 줄로 알려주세요",
+        "field": "category"
+      }
+    ]
+  },
+  "failure": "NEEDS_MORE_INFO",
+  "incident_id": null
+}

@@ -1,0 +1,29 @@
+{
+  "task_id": "job-sample-out_of_scope_draft",
+  "from": "supervisor",
+  "to": "verifier",
+  "objective": "창구 또는 문구 검증",
+  "inputs": {
+    "mode": "draft",
+    "category": "out_of_scope",
+    "region": {
+      "sido": "서울특별시",
+      "sigungu": "동작구",
+      "dong": "상도동",
+      "place_text": "상도동 주민센터 앞"
+    },
+    "draft": {
+      "title": "동작구 상도동 가로등 고장 신고",
+      "body": "상도동 주민센터 앞에서 어제 가로등 고장 문제를 확인했습니다. 확인과 조치를 부탁드립니다.",
+      "fill_in": [],
+      "removed_pii": []
+    }
+  },
+  "constraints": [
+    "개인정보를 묻지 말 것",
+    "공식 출처만 사용할 것"
+  ],
+  "attempt": 1,
+  "last_failure": null,
+  "memory_refs": []
+}

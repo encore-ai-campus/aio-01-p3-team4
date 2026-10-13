@@ -1,0 +1,171 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://minwon.local/contracts/handoff.schema.json",
+  "type": "object",
+  "properties": {
+    "task_id": {
+      "type": "string"
+    },
+    "from": {
+      "const": "supervisor"
+    },
+    "to": {
+      "enum": [
+        "classifier",
+        "locator",
+        "verifier",
+        "writer",
+        "mailer"
+      ]
+    },
+    "objective": {
+      "type": "string"
+    },
+    "inputs": {
+      "type": "object"
+    },
+    "constraints": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "attempt": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "last_failure": {
+      "$ref": "common.schema.json#/$defs/failure"
+    },
+    "memory_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "task_id",
+    "from",
+    "to",
+    "objective",
+    "inputs",
+    "constraints",
+    "attempt",
+    "last_failure",
+    "memory_refs"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "attempt": {
+            "minimum": 2
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "last_failure": {
+            "enum": [
+              "LLM_OUTPUT_INVALID",
+              "NEEDS_MORE_INFO",
+              "OUT_OF_SCOPE",
+              "NO_CHANNEL",
+              "LINK_DEAD",
+              "NOT_OFFICIAL",
+              "STALE_INFO",
+              "PII_IN_DRAFT",
+              "DRAFT_MISMATCH",
+              "INJECTION_BLOCKED",
+              "SERVICE_UNAVAILABLE",
+              "MAIL_SEND_FAILED",
+              "MAIL_BLOCKED"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "to": {
+            "const": "classifier"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "inputs": {
+            "$ref": "classifier_input.schema.json"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "to": {
+            "const": "locator"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "inputs": {
+            "$ref": "locator_input.schema.json"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "to": {
+            "const": "verifier"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "inputs": {
+            "$ref": "verifier_input.schema.json"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "to": {
+            "const": "writer"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "inputs": {
+            "$ref": "writer_input.schema.json"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "to": {
+            "const": "mailer"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "inputs": {
+            "$ref": "mailer_input.schema.json"
+          }
+        }
+      }
+    }
+  ]
+}

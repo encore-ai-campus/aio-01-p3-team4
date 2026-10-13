@@ -1,0 +1,34 @@
+{
+  "task_id": "job-sample-illegal_dumping_draft",
+  "author": "verifier",
+  "status": "success",
+  "data": {
+    "verdict": "PASS",
+    "checks": [
+      {
+        "name": "pii",
+        "ok": true,
+        "detail": "개인정보 없음"
+      },
+      {
+        "name": "category",
+        "ok": true,
+        "detail": "유형 키워드 일치"
+      },
+      {
+        "name": "region",
+        "ok": true,
+        "detail": "지역 일치"
+      },
+      {
+        "name": "links",
+        "ok": true,
+        "detail": "문구 링크 공식 주소"
+      }
+    ],
+    "reasons": [],
+    "passed_channel_ids": []
+  },
+  "failure": null,
+  "incident_id": null
+}

@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://minwon.local/contracts/classifier.schema.json",
+  "type": "object",
+  "properties": {
+    "evidence": {"$ref": "common.schema.json#/$defs/evidence"},
+    "recovery": {
+      "type": "object", "additionalProperties": false,
+      "required": ["attempts", "recovered_by", "elapsed_ms", "started_at"],
+      "properties": {
+        "attempts": {
+          "type": "array", "minItems": 1,
+          "items": {
+            "type": "object", "additionalProperties": false,
+            "required": ["model", "error_type", "elapsed_ms", "started_at"],
+            "properties": {
+              "evidence": {"$ref": "common.schema.json#/$defs/evidence"},
+              "model": {"type": "string", "minLength": 1},
+              "error_type": {"type": "string", "pattern": "^[A-Za-z][A-Za-z0-9_]*$"},
+              "elapsed_ms": {"type": "integer", "minimum": 0},
+              "started_at": {"type": "string", "format": "date-time", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(\\.[0-9]+)?(Z|\\+00:00)$"}
+            }
+          }
+        },
+        "recovered_by": {"type": "string", "minLength": 1},
+        "elapsed_ms": {"type": "integer", "minimum": 0},
+        "started_at": {"type": "string", "format": "date-time", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(\\.[0-9]+)?(Z|\\+00:00)$"}
+      }
+    },
+    "category": {
+      "anyOf": [
+        {"$ref": "common.schema.json#/$defs/category"},
+        {"type": "null"}
+      ],
+      "description": "민원 내용이 없으면 null; q_what으로 불편 설명을 요청한다."
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "region": {
+      "$ref": "common.schema.json#/$defs/region"
+    },
+    "details": {
+      "$ref": "common.schema.json#/$defs/details"
+    },
+    "missing": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/field"
+      }
+    },
+    "questions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "q_what은 민원 내용 되묻기; 나머지는 기존 필드별 질문 ID"
+          },
+          "text": {
+            "type": "string"
+          },
+          "field": {
+            "$ref": "common.schema.json#/$defs/field"
+          }
+        },
+        "required": [
+          "id",
+          "text",
+          "field"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "category",
+    "confidence",
+    "region",
+    "details",
+    "missing",
+    "questions"
+  ],
+  "additionalProperties": false
+}

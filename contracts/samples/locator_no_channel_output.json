@@ -1,0 +1,11 @@
+{
+  "task_id": "job-sample-no_channel",
+  "author": "locator",
+  "status": "failed",
+  "data": {
+    "channels": [],
+    "fallback_level": "national"
+  },
+  "failure": "NO_CHANNEL",
+  "incident_id": null
+}

@@ -1,0 +1,16 @@
+{
+  "task_id": "job-sample-mailer",
+  "author": "mailer",
+  "status": "success",
+  "data": {
+    "message_id": "<job-sample-mailer.report@minwon.example>",
+    "to": "epeople-desk@minwon.example",
+    "dept": "국민신문고 민원처리과(가상)",
+    "officer": "김가상 주무관",
+    "status": "sent",
+    "receipt_no": "2026-1007-0001",
+    "attempts": 1
+  },
+  "failure": null,
+  "incident_id": null
+}

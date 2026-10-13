@@ -1,0 +1,32 @@
+{
+  "task_id": "job-0012",
+  "author": "locator",
+  "status": "success",
+  "data": {
+    "channels": [
+      {
+        "channel_id": "national-all-01",
+        "name": "국민신문고",
+        "org": "국민권익위원회",
+        "method": "web",
+        "url": "https://www.epeople.go.kr/",
+        "jurisdiction": "전국",
+        "verified_at": "2026-10-06",
+        "source_url": "https://www.epeople.go.kr/"
+      },
+      {
+        "channel_id": "national-all-02",
+        "name": "안전신문고",
+        "org": "행정안전부",
+        "method": "web",
+        "url": "https://www.safetyreport.go.kr/",
+        "jurisdiction": "전국",
+        "verified_at": "2026-10-06",
+        "source_url": "https://www.safetyreport.go.kr/"
+      }
+    ],
+    "fallback_level": "national"
+  },
+  "failure": null,
+  "incident_id": null
+}

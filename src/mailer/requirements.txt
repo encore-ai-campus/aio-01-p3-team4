@@ -1,0 +1,9 @@
+fastapi==0.142.2
+pydantic==2.13.5
+uvicorn==0.54.0
+redis==6.4.0
+httpx==0.28.1
+pytest==9.1.1
+jsonschema==4.26.0
+python-dotenv==1.1.1
+rfc3986-validator==0.1.1

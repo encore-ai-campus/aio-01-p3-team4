@@ -1,0 +1,16 @@
+{
+  "task_id": "job-sample-out_of_scope",
+  "from": "supervisor",
+  "to": "classifier",
+  "objective": "민원 유형과 지역 파악",
+  "inputs": {
+    "text": "지원 범위 밖 질문"
+  },
+  "constraints": [
+    "개인정보를 묻지 말 것",
+    "공식 출처만 사용할 것"
+  ],
+  "attempt": 1,
+  "last_failure": null,
+  "memory_refs": []
+}

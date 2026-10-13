@@ -1,0 +1,37 @@
+{
+  "task_id": "job-sample-road_damage",
+  "from": "supervisor",
+  "to": "writer",
+  "objective": "신고 문구 초안 작성",
+  "inputs": {
+    "category": "road_damage",
+    "region": {
+      "sido": "서울특별시",
+      "sigungu": "동작구",
+      "dong": "상도동",
+      "place_text": "상도동 주민센터 앞"
+    },
+    "details": {
+      "location_detail": "상도동 주민센터 앞",
+      "occurred_at": "어제",
+      "has_photo": false
+    },
+    "channel": {
+      "channel_id": "national-all-01",
+      "name": "국민신문고",
+      "org": "국민권익위원회",
+      "method": "web",
+      "url": "https://www.epeople.go.kr/",
+      "jurisdiction": "전국",
+      "verified_at": "2026-10-06",
+      "source_url": "https://www.epeople.go.kr/"
+    }
+  },
+  "constraints": [
+    "개인정보를 묻지 말 것",
+    "공식 출처만 사용할 것"
+  ],
+  "attempt": 1,
+  "last_failure": null,
+  "memory_refs": []
+}

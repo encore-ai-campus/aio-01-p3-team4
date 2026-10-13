@@ -1,0 +1,24 @@
+{
+  "task_id": "job-sample-out_of_scope",
+  "author": "classifier",
+  "status": "failed",
+  "data": {
+    "category": "out_of_scope",
+    "confidence": 0,
+    "region": {
+      "sido": null,
+      "sigungu": null,
+      "dong": null,
+      "place_text": null
+    },
+    "details": {
+      "location_detail": null,
+      "occurred_at": null,
+      "has_photo": null
+    },
+    "missing": [],
+    "questions": []
+  },
+  "failure": "OUT_OF_SCOPE",
+  "incident_id": null
+}

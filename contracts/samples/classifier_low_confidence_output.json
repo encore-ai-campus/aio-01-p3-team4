@@ -1,0 +1,32 @@
+{
+  "task_id": "job-sample-low_confidence",
+  "author": "classifier",
+  "status": "needs_user",
+  "data": {
+    "category": "road_damage",
+    "confidence": 0.4,
+    "region": {
+      "sido": "서울특별시",
+      "sigungu": "동작구",
+      "dong": "상도동",
+      "place_text": "상도동 길"
+    },
+    "details": {
+      "location_detail": null,
+      "occurred_at": null,
+      "has_photo": null
+    },
+    "missing": [
+      "category"
+    ],
+    "questions": [
+      {
+        "id": "q1",
+        "text": "어떤 문제인지 골라 주세요: 가로등 고장 / 도로 파손 / 쓰레기 무단투기",
+        "field": "category"
+      }
+    ]
+  },
+  "failure": "NEEDS_MORE_INFO",
+  "incident_id": null
+}

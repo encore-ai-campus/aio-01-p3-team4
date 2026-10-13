@@ -1,0 +1,46 @@
+{
+  "task_id": "job-sample-not_official",
+  "author": "verifier",
+  "status": "failed",
+  "data": {
+    "verdict": "FAIL",
+    "checks": [
+      {
+        "name": "official",
+        "ok": false,
+        "detail": "national-all-01 · 비공식 주소"
+      },
+      {
+        "name": "fresh",
+        "ok": true,
+        "detail": "national-all-01 · 확인일 90일 이내"
+      },
+      {
+        "name": "scope",
+        "ok": true,
+        "detail": "national-all-01 · 지역·유형 일치"
+      },
+      {
+        "name": "official",
+        "ok": false,
+        "detail": "national-all-02 · 비공식 주소"
+      },
+      {
+        "name": "fresh",
+        "ok": true,
+        "detail": "national-all-02 · 확인일 90일 이내"
+      },
+      {
+        "name": "scope",
+        "ok": true,
+        "detail": "national-all-02 · 지역·유형 일치"
+      }
+    ],
+    "reasons": [
+      "NOT_OFFICIAL"
+    ],
+    "passed_channel_ids": []
+  },
+  "failure": "NOT_OFFICIAL",
+  "incident_id": null
+}

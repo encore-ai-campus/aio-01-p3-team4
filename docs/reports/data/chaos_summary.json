@@ -1,0 +1,196 @@
+{
+  "measured_at": "2026-10-12T06:05:48.928433+00:00",
+  "commit": "9d18755",
+  "base": "http://127.0.0.1:8000",
+  "started_at": "2026-10-12T05:32:41.430314+00:00",
+  "total_runs": 110,
+  "job_statuses": {
+    "failed": 25,
+    "success": 85
+  },
+  "runs_per_kind": 10,
+  "kinds": {
+    "llm_invalid@classifier": {
+      "attempts": 10,
+      "missed": 0,
+      "auto_recovered": 10,
+      "blocked": 0,
+      "auto_recovery_rate": 1.0,
+      "recovery_sec_avg": 0.0234635,
+      "recovery_sec_max": 0.043676,
+      "result_ok": 10
+    },
+    "link_dead@verifier": {
+      "attempts": 10,
+      "missed": 0,
+      "auto_recovered": 10,
+      "blocked": 0,
+      "auto_recovery_rate": 1.0,
+      "recovery_sec_avg": 3.0469902,
+      "recovery_sec_max": 5.179306,
+      "result_ok": 10
+    },
+    "stale_info@verifier": {
+      "attempts": 10,
+      "missed": 0,
+      "auto_recovered": 10,
+      "blocked": 0,
+      "auto_recovery_rate": 1.0,
+      "recovery_sec_avg": 0.0187235,
+      "recovery_sec_max": 0.027978,
+      "result_ok": 10
+    },
+    "pii_leak@verifier": {
+      "attempts": 10,
+      "missed": 0,
+      "auto_recovered": 10,
+      "blocked": 0,
+      "auto_recovery_rate": 1.0,
+      "recovery_sec_avg": 0.10906149999999999,
+      "recovery_sec_max": 0.131981,
+      "result_ok": 10
+    },
+    "not_official@verifier": {
+      "attempts": 10,
+      "missed": 0,
+      "auto_recovered": 10,
+      "blocked": 0,
+      "auto_recovery_rate": 1.0,
+      "recovery_sec_avg": 3.0200324,
+      "recovery_sec_max": 5.185191,
+      "result_ok": 10
+    },
+    "injection@backend": {
+      "attempts": 10,
+      "missed": 0,
+      "auto_recovered": 10,
+      "blocked": 10,
+      "auto_recovery_rate": 1.0,
+      "recovery_sec_avg": 0.021801300000000003,
+      "recovery_sec_max": 0.039546,
+      "result_ok": 10
+    },
+    "delay@classifier": {
+      "attempts": 10,
+      "missed": 0,
+      "auto_recovered": 10,
+      "blocked": 0,
+      "auto_recovery_rate": 1.0,
+      "recovery_sec_avg": 4.682024,
+      "recovery_sec_max": 5.246813,
+      "result_ok": 10
+    },
+    "mail_down@mailer": {
+      "attempts": 10,
+      "missed": 0,
+      "auto_recovered": 10,
+      "blocked": 0,
+      "auto_recovery_rate": 1.0,
+      "recovery_sec_avg": 21.7713313,
+      "recovery_sec_max": 23.425332,
+      "result_ok": 10
+    },
+    "service_down": {
+      "attempts": 5,
+      "missed": 0,
+      "auto_recovered": 5,
+      "blocked": 0,
+      "auto_recovery_rate": 1.0,
+      "recovery_sec_avg": 7.4712204,
+      "recovery_sec_max": 9.243271,
+      "result_ok": 5
+    },
+    "db_cut@postgres": {
+      "attempts": 5,
+      "missed": 0,
+      "auto_recovered": 5,
+      "blocked": 0,
+      "auto_recovery_rate": 1.0,
+      "recovery_sec_avg": 15.9704262,
+      "recovery_sec_max": 18.823309,
+      "result_ok": 5
+    },
+    "link_dead@verifier:stress": {
+      "attempts": 5,
+      "missed": 0,
+      "auto_recovered": 0,
+      "blocked": 0,
+      "auto_recovery_rate": 0.0,
+      "recovery_sec_avg": null,
+      "recovery_sec_max": null,
+      "result_ok": 0
+    },
+    "not_official@verifier:stress": {
+      "attempts": 5,
+      "missed": 0,
+      "auto_recovered": 0,
+      "blocked": 0,
+      "auto_recovery_rate": 0.0,
+      "recovery_sec_avg": null,
+      "recovery_sec_max": null,
+      "result_ok": 0
+    },
+    "delay@classifier:stress": {
+      "attempts": 5,
+      "missed": 0,
+      "auto_recovered": 0,
+      "blocked": 0,
+      "auto_recovery_rate": 0.0,
+      "recovery_sec_avg": null,
+      "recovery_sec_max": null,
+      "result_ok": 0
+    },
+    "mail_down@mailer:stress": {
+      "attempts": 5,
+      "missed": 0,
+      "auto_recovered": 5,
+      "blocked": 0,
+      "auto_recovery_rate": 1.0,
+      "recovery_sec_avg": 46.527576599999996,
+      "recovery_sec_max": 48.536355,
+      "result_ok": 5
+    }
+  },
+  "overall": {
+    "attempts": 110,
+    "missed": 0,
+    "auto_recovered": 95,
+    "blocked": 10,
+    "auto_recovery_rate": 0.8636363636363636,
+    "recovery_sec_avg": 7.124004136842105
+  },
+  "overall_in_metrics": {
+    "attempts": 105,
+    "missed": 0,
+    "auto_recovered": 90,
+    "blocked": 10,
+    "auto_recovery_rate": 0.8571428571428571,
+    "recovery_sec_avg": 6.632536244444444
+  },
+  "natural": {
+    "count": 30,
+    "auto_recovered": 30,
+    "recovery_sec_avg": 0.0199562,
+    "by_fault": {
+      "LLM_OUTPUT_INVALID": 30
+    }
+  },
+  "metrics_check": {
+    "expected_total": 400,
+    "metrics_total": 400,
+    "match": true
+  },
+  "assumes_empty_incidents_before": false,
+  "metrics_before": {
+    "total": 265,
+    "auto_recovered": 260,
+    "auto_recovery_rate": 0.9811320754716981,
+    "avg_recovery_sec": 1.469102680769231
+  },
+  "metrics_after": {
+    "total": 400,
+    "auto_recovered": 380,
+    "auto_recovery_rate": 0.95,
+    "avg_recovery_sec": 2.5776148552631577
+  }
+}

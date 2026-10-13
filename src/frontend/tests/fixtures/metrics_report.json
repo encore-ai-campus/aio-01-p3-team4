@@ -1,0 +1,52 @@
+{
+  "since": "2026-10-12T04:26:00Z",
+  "defaults": { "fault": "link_dead", "injected_at": "2026-10-12T04:26:00Z", "detected_at": "2026-10-12T04:26:00Z", "recovered_at": "2026-10-12T04:26:07.390Z", "human_intervention": false, "result": "recovered" },
+  "cases": [
+    {
+      "name": "report_snapshot_123_108_87_8",
+      "groups": [
+        { "count": 86 },
+        { "count": 15, "result": "failed", "recovered_at": null },
+        { "count": 11, "fault": "stale_info", "result": "degraded", "recovered_at": "2026-10-12T04:26:01Z" },
+        { "count": 11, "fault": "INJECTION_BLOCKED", "injected_at": null, "result": "blocked", "recovered_at": "2026-10-12T04:26:00.020Z" },
+        { "count": 74, "fault": "LLM_OUTPUT_INVALID", "injected_at": null },
+        { "count": 5, "fault": "SERVICE_UNAVAILABLE", "injected_at": null },
+        { "count": 1, "fault": "DRAFT_MISMATCH", "injected_at": null, "result": "failed", "recovered_at": null },
+        { "count": 1, "fault": "OUT_OF_SCOPE", "injected_at": null, "result": "failed", "recovered_at": null }
+      ],
+      "expected": { "total": 123, "auto_recovered": 108, "auto_recovery_rate": 0.8780487804878049, "avg_recovery_sec": 7.39 },
+      "frontend_avg": 7.39
+    },
+    {
+      "name": "blocked_detection_boundary_and_natural_exclusion",
+      "groups": [
+        { "count": 1, "fault": "INJECTION_BLOCKED", "injected_at": null, "result": "blocked" },
+        { "count": 1, "fault": "INJECTION_BLOCKED", "injected_at": null, "result": "blocked", "detected_at": "2026-10-12T04:25:59Z" },
+        { "count": 1, "fault": "INJECTION_BLOCKED", "injected_at": "2026-10-12T04:25:59Z", "result": "blocked" },
+        { "count": 1, "fault": "INJECTION_BLOCKED", "injected_at": null, "result": "blocked", "detected_at": null },
+        { "count": 1, "injected_at": null, "result": "blocked" },
+        { "count": 1, "fault": "INJECTION_BLOCKED", "injected_at": null, "result": "failed" },
+        { "count": 1, "fault": "STALE_INFO", "injected_at": null, "result": "degraded" },
+        { "count": 1, "fault": "INJECTION_BLOCKED", "result": "blocked" },
+        { "count": 1, "detected_at": "2026-10-12T04:25:59Z", "recovered_at": "2026-10-12T04:26:06.390Z" },
+        { "count": 1, "injected_at": "2026-10-12T04:25:59Z" },
+        { "count": 1, "result": "injected", "detected_at": null, "recovered_at": null }
+      ],
+      "expected": { "total": 4, "auto_recovered": 4, "auto_recovery_rate": 1, "avg_recovery_sec": 7.39 },
+      "frontend_avg": 7.39
+    },
+    {
+      "name": "handled_without_timing_and_human_intervention",
+      "groups": [
+        { "count": 1, "recovered_at": null },
+        { "count": 1, "fault": "INJECTION_BLOCKED", "injected_at": null, "result": "blocked", "recovered_at": null },
+        { "count": 1, "fault": "stale_info", "result": "degraded", "recovered_at": null },
+        { "count": 1, "human_intervention": true },
+        { "count": 1, "fault": "INJECTION_BLOCKED", "injected_at": null, "result": "blocked", "human_intervention": true },
+        { "count": 1, "fault": "STALE_INFO", "result": "degraded", "human_intervention": true }
+      ],
+      "expected": { "total": 6, "auto_recovered": 3, "auto_recovery_rate": 0.5, "avg_recovery_sec": 0 },
+      "frontend_avg": null
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "task_id": "job-sample-pii_in_draft",
+  "author": "verifier",
+  "status": "retry",
+  "data": {
+    "verdict": "RETRY",
+    "checks": [
+      {
+        "name": "pii",
+        "ok": false,
+        "detail": "합성 전화번호"
+      }
+    ],
+    "reasons": [
+      "PII_IN_DRAFT"
+    ],
+    "passed_channel_ids": []
+  },
+  "failure": "PII_IN_DRAFT",
+  "incident_id": null
+}

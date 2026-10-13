@@ -1,0 +1,57 @@
+{
+  "task_id": "job-sample-streetlight",
+  "author": "verifier",
+  "status": "success",
+  "data": {
+    "verdict": "PASS",
+    "checks": [
+      {
+        "name": "official",
+        "ok": true,
+        "detail": "national-all-01 · 공식 주소"
+      },
+      {
+        "name": "link",
+        "ok": true,
+        "detail": "national-all-01 · 응답 200"
+      },
+      {
+        "name": "fresh",
+        "ok": true,
+        "detail": "national-all-01 · 확인일 90일 이내"
+      },
+      {
+        "name": "scope",
+        "ok": true,
+        "detail": "national-all-01 · 지역·유형 일치"
+      },
+      {
+        "name": "official",
+        "ok": true,
+        "detail": "national-all-02 · 공식 주소"
+      },
+      {
+        "name": "link",
+        "ok": true,
+        "detail": "national-all-02 · 응답 200"
+      },
+      {
+        "name": "fresh",
+        "ok": true,
+        "detail": "national-all-02 · 확인일 90일 이내"
+      },
+      {
+        "name": "scope",
+        "ok": true,
+        "detail": "national-all-02 · 지역·유형 일치"
+      }
+    ],
+    "reasons": [],
+    "passed_channel_ids": [
+      "national-all-01",
+      "national-all-02"
+    ]
+  },
+  "failure": null,
+  "incident_id": null
+}

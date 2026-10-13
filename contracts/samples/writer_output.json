@@ -1,0 +1,13 @@
+{
+  "task_id": "job-0012",
+  "author": "writer",
+  "status": "success",
+  "data": {
+    "title": "동작구 상도동 가로등 고장 신고",
+    "body": "상도동 주민센터 앞에서 어제 가로등 고장 문제를 확인했습니다. 확인과 조치를 부탁드립니다.",
+    "fill_in": [],
+    "removed_pii": []
+  },
+  "failure": null,
+  "incident_id": null
+}

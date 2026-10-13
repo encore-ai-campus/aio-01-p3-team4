@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://minwon.local/contracts/final.schema.json",
+  "type": "object",
+  "properties": {
+    "category": {
+      "$ref": "common.schema.json#/$defs/category"
+    },
+    "region": {
+      "$ref": "common.schema.json#/$defs/region"
+    },
+    "channels": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/channel"
+      }
+    },
+    "draft": {
+      "$ref": "writer.schema.json"
+    },
+    "confirm_needed": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "checked_at": {
+            "type": "string",
+            "format": "date"
+          }
+        },
+        "required": [
+          "url",
+          "checked_at"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "category",
+    "region",
+    "channels",
+    "draft",
+    "confirm_needed",
+    "sources"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,2 @@
+﻿schedule_id,run_on_start,interval_seconds,retry_seconds,http_timeout_seconds,max_redirects,database_url_env,description,implementation_status,source_path,verified_at
+channel-check-01,true,86400,3600,10,5,DATABASE_URL,운영자가 --schedule-csv로 실행할 때만 사용. 초회 즉시 점검하고 회차 완료 후 24시간 대기; 회차 실패 후 1시간 대기. --once는 즉시 한 번만 실행. 비밀값은 환경변수에 두며 CSV는 운영자가 검토해 변경. OS 정기 작업은 자동 등록하지 않음.,implemented_opt_in_not_registered,scripts/check_channels.py,2026-10-07

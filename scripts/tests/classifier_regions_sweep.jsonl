@@ -1,0 +1,20 @@
+{"text": "가로등이 작동 안 해요", "expect": ["ask_location"]}
+{"text": "노량진역 1번 출구 앞 가로등이 작동 안 해요", "expect": ["proceed"]}
+{"text": "노량진역 1번 출구 앞 보도블록이 들떠서 넘어질 뻔했어요", "expect": ["proceed"]}
+{"text": "동작구 아파트 공동 현관 앞에 쓰레기 무단투기", "expect": ["ask_location", "proceed"]}
+{"text": "상도동 음식물 쓰레기 투입구 옆에 무단투기", "expect": ["proceed", "ask_location"]}
+{"text": "보라매공원 운동기구 옆 가로등 고장", "expect": ["proceed", "ask_location"]}
+{"text": "노량진역 환풍구 옆 보도블록이 깨졌어요", "expect": ["proceed"]}
+{"text": "관악구에서 가로등이 고장 났어요", "expect": ["out_of_scope"]}
+{"text": "흑석역 2번 출구 앞 인도가 움푹 패였어요", "expect": ["proceed"]}
+{"text": "흑석역 2번 출구 앞에 누가 소파를 몰래 버리고 갔어요", "expect": ["proceed"]}
+{"text": "이마트 앞에 쓰레기 무단투기가 심해요", "expect": ["ask_location"]}
+{"text": "사당3동 우리 아파트 정문 앞 쓰레기 무단투기", "expect": ["proceed"]}
+{"text": "서울 동작구 상도동 석남역 앞 가로등 고장", "expect": ["ask_location"]}
+{"text": "서울시 동작구 흑성동 가로등이 나갓어요", "expect": ["ask_location"]}
+{"text": "누가 소파를 몰래 버리고 갔어요", "expect": ["ask_location"], "category": "illegal_dumping"}
+{"text": "흑석역 앞 골목 등이 밤새 안 켜져요", "expect": ["proceed"], "category": "streetlight"}
+{"text": "서울 동작구 석남동 가로등 고장", "expect": ["ask_location"]}
+{"text": "인천 서구 석남동 석남역 앞 가로등 고장", "expect": ["out_of_scope"]}
+{"text": "서울 동작구 오류동 노량진 역 앞 가로등 고장", "expect": ["ask_location"]}
+{"text": "가로등이 고장났어요", "answers": {"q_location_detail": "상도동 노량진역 앞", "q_confirm_location": "네 맞아요"}, "expect": ["proceed"]}

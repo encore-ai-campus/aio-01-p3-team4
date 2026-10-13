@@ -1,0 +1,9 @@
+
+# Linux에서도 실행하는 장애 스크립트의 줄바꿈 고정
+scripts/chaos_infra.sh text eol=lf
+scripts/tests/*.sh text eol=lf
+scripts/deploy_chaos*.sh text eol=lf
+.github/workflows/chaos.yml text eol=lf
+scripts/deploy_service*.sh text eol=lf
+.github/workflows/*.yml text eol=lf
+scripts/lint_chaos.sh text eol=lf

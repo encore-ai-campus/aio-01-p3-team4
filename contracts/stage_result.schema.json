@@ -1,0 +1,442 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://minwon.local/contracts/stage_result.schema.json",
+  "type": "object",
+  "properties": {
+    "task_id": {
+      "type": "string"
+    },
+    "author": {
+      "enum": [
+        "classifier",
+        "locator",
+        "verifier",
+        "writer",
+        "backend",
+        "mailer"
+      ]
+    },
+    "status": {
+      "enum": [
+        "success",
+        "retry",
+        "failed",
+        "needs_user"
+      ]
+    },
+    "data": {
+      "type": "object",
+      "properties": {"evidence": {"$ref": "common.schema.json#/$defs/evidence"}}
+    },
+    "failure": {
+      "$ref": "common.schema.json#/$defs/failure"
+    },
+    "incident_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "task_id",
+    "author",
+    "status",
+    "data",
+    "failure",
+    "incident_id"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "failure": {
+            "const": "LLM_OUTPUT_INVALID"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "status": {
+            "const": "retry"
+          },
+          "author": {
+            "enum": [
+              "classifier",
+              "writer"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "failure": {
+            "const": "NEEDS_MORE_INFO"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "status": {
+            "const": "needs_user"
+          },
+          "author": {
+            "enum": [
+              "classifier"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "failure": {
+            "const": "OUT_OF_SCOPE"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "status": {
+            "const": "failed"
+          },
+          "author": {
+            "enum": [
+              "classifier"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "failure": {
+            "const": "NO_CHANNEL"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "status": {
+            "const": "failed"
+          },
+          "author": {
+            "enum": [
+              "locator"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "failure": {
+            "const": "LINK_DEAD"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "status": {
+            "const": "failed"
+          },
+          "author": {
+            "enum": [
+              "verifier"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "failure": {
+            "const": "NOT_OFFICIAL"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "status": {
+            "const": "failed"
+          },
+          "author": {
+            "enum": [
+              "verifier"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "failure": {
+            "const": "STALE_INFO"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "status": {
+            "const": "success"
+          },
+          "author": {
+            "enum": [
+              "verifier"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "failure": {
+            "const": "PII_IN_DRAFT"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "status": {
+            "const": "retry"
+          },
+          "author": {
+            "enum": [
+              "verifier"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "failure": {
+            "const": "DRAFT_MISMATCH"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "status": {
+            "const": "retry"
+          },
+          "author": {
+            "enum": [
+              "verifier"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "failure": {
+            "const": "INJECTION_BLOCKED"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "status": {
+            "const": "failed"
+          },
+          "author": {
+            "enum": [
+              "backend"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "failure": {
+            "const": "SERVICE_UNAVAILABLE"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "status": {
+            "const": "retry"
+          },
+          "author": {
+            "enum": [
+              "backend"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "failure": {
+            "type": "null"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "status": {
+            "const": "success"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "author": {
+            "const": "classifier"
+          },
+          "failure": {
+            "not": {
+              "const": "LLM_OUTPUT_INVALID"
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "data": {
+            "$ref": "classifier.schema.json"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "author": {
+            "const": "locator"
+          },
+          "failure": {
+            "not": {
+              "const": "LLM_OUTPUT_INVALID"
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "data": {
+            "$ref": "locator.schema.json"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "author": {
+            "const": "verifier"
+          },
+          "failure": {
+            "not": {
+              "const": "LLM_OUTPUT_INVALID"
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "data": {
+            "$ref": "verifier.schema.json"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "author": {
+            "const": "writer"
+          },
+          "failure": {
+            "not": {
+              "const": "LLM_OUTPUT_INVALID"
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "data": {
+            "$ref": "writer.schema.json"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "failure": {
+            "const": "MAIL_SEND_FAILED"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "status": {
+            "const": "retry"
+          },
+          "author": {
+            "enum": [
+              "mailer"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "failure": {
+            "const": "MAIL_BLOCKED"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "status": {
+            "const": "failed"
+          },
+          "author": {
+            "enum": [
+              "mailer"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "author": {
+            "const": "mailer"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "data": {
+            "$ref": "mailer.schema.json"
+          }
+        }
+      }
+    }
+  ]
+}

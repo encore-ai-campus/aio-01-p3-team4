@@ -1,0 +1,12 @@
+{
+  "task_id": "job-sample-llm_invalid",
+  "author": "classifier",
+  "status": "retry",
+  "data": {
+    "evidence": {
+      "broken": "응답: 분류 결과를 문장으로 설명합니다 · JSONDecodeError"
+    }
+  },
+  "failure": "LLM_OUTPUT_INVALID",
+  "incident_id": null
+}

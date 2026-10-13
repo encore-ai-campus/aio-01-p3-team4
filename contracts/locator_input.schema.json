@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://minwon.local/contracts/locator_input.schema.json",
+  "type": "object",
+  "properties": {
+    "category": {
+      "$ref": "common.schema.json#/$defs/category"
+    },
+    "region": {
+      "$ref": "common.schema.json#/$defs/region"
+    },
+    "exclude_channel_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "category",
+    "region",
+    "exclude_channel_ids"
+  ],
+  "additionalProperties": false
+}

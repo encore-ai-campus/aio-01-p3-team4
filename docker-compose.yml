@@ -1,0 +1,126 @@
+name: minwon
+x-python: &python
+  init: true
+  restart: unless-stopped
+  depends_on:
+    postgres: {condition: service_healthy, required: false}
+    redis: {condition: service_healthy, required: false}
+x-env: &env
+  DATABASE_URL: ${DATABASE_URL:-postgresql://${POSTGRES_USER:-minwon}:${POSTGRES_PASSWORD:-minwon_local}@postgres:5432/${POSTGRES_DB:-minwon}}
+  REDIS_URL: ${REDIS_URL:-redis://redis:6379/0}
+  OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+  KAKAO_REST_KEY: ${KAKAO_REST_KEY:-}
+  OPENAI_MODEL: ${OPENAI_MODEL:-gpt-6-luna}
+  OPENAI_FALLBACK_MODEL: ${OPENAI_FALLBACK_MODEL:-gpt-5.4-mini}
+services:
+  # postgres·redis는 COMPOSE_PROFILES=local일 때만 뜬다(로컬 한 벌 실행).
+  # 앱 서버는 COMPOSE_PROFILES를 비우고 DATABASE_URL·REDIS_URL로 데이터 서버(deploy/data)에 붙는다.
+  postgres:
+    profiles: [local]
+    image: pgvector/pgvector:pg17
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-minwon}
+      POSTGRES_USER: ${POSTGRES_USER:-minwon}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-minwon_local}
+    ports: ["127.0.0.1:${POSTGRES_PORT:-5432}:5432"]
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/001-schema.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+  redis:
+    profiles: [local]
+    image: redis:7-alpine
+    restart: unless-stopped
+    ports: ["127.0.0.1:${REDIS_PORT:-6379}:6379"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+  backend:
+    <<: *python
+    build: {context: ., dockerfile: src/backend/Dockerfile}
+    environment:
+      <<: *env
+      CLASSIFIER_URL: ${CLASSIFIER_URL:-http://classifier:8000}
+      LOCATOR_URL: ${LOCATOR_URL:-http://locator:8000}
+      VERIFIER_URL: ${VERIFIER_URL:-http://verifier:8000}
+      WRITER_URL: ${WRITER_URL:-http://writer:8000}
+      MAILER_URL: ${MAILER_URL:-http://mailer:8000}
+      CHAOS_URL: ${CHAOS_URL:-http://chaos:8000}
+      METRICS_SINCE: ${METRICS_SINCE:-2026-10-12T04:26:00Z}
+    ports: ["127.0.0.1:${BACKEND_PORT:-8000}:8000"]
+  classifier:
+    <<: *python
+    build: {context: ., dockerfile: src/classifier/Dockerfile}
+    environment:
+      <<: *env
+    ports: ["127.0.0.1:${CLASSIFIER_PORT:-8010}:8000"]
+  locator:
+    <<: *python
+    build: {context: ., dockerfile: src/locator/Dockerfile}
+    environment:
+      <<: *env
+    volumes: ["./database/seeds:/seeds:ro"]
+    ports: ["127.0.0.1:${LOCATOR_PORT:-8020}:8000"]
+  verifier:
+    <<: *python
+    build: {context: ., dockerfile: src/verifier/Dockerfile}
+    environment:
+      <<: *env
+    ports: ["127.0.0.1:${VERIFIER_PORT:-8030}:8000"]
+  writer:
+    <<: *python
+    build: {context: ., dockerfile: src/writer/Dockerfile}
+    environment:
+      <<: *env
+    ports: ["127.0.0.1:${WRITER_PORT:-8040}:8000"]
+  mailer:
+    <<: *python
+    build: {context: ., dockerfile: src/mailer/Dockerfile}
+    environment:
+      <<: *env
+      SMTP_HOST: ${SMTP_HOST:-mailpit}
+      SMTP_PORT: ${SMTP_PORT:-1025}
+      MAIL_RELAY_HOST: ${MAIL_RELAY_HOST:-}
+      MAIL_RELAY_PORT: ${MAIL_RELAY_PORT:-587}
+      MAIL_RELAY_USER: ${MAIL_RELAY_USER:-}
+      MAIL_RELAY_PASSWORD: ${MAIL_RELAY_PASSWORD:-}
+      MAIL_RELAY_TO: ${MAIL_RELAY_TO:-}
+    depends_on:
+      postgres: {condition: service_healthy, required: false}
+      redis: {condition: service_healthy, required: false}
+      mailpit: {condition: service_started, required: false}
+    ports: ["127.0.0.1:${MAILER_PORT:-8060}:8000"]
+  # 가상 우체국 — 받은 메일을 밖으로 내보내지 않는다. MP_SMTP_RELAY_* 설정 추가 금지
+  mailpit:
+    image: axllent/mailpit:v1.31
+    restart: unless-stopped
+    environment:
+      MP_WEBROOT: /mailbox
+    ports: ["127.0.0.1:${MAILPIT_SMTP_PORT:-1025}:1025", "127.0.0.1:${MAILPIT_WEB_PORT:-8025}:8025"]
+  chaos:
+    <<: *python
+    build: {context: ., dockerfile: src/chaos/Dockerfile}
+    environment:
+      <<: *env
+      MAILPIT_CONTAINER: ${MAILPIT_CONTAINER:-${COMPOSE_PROJECT_NAME:-minwon}-mailpit-1}
+    volumes: ["/var/run/docker.sock:/var/run/docker.sock"]
+    ports: ["127.0.0.1:${CHAOS_PORT:-8050}:8000"]
+  frontend:
+    build: {context: ., dockerfile: src/frontend/Dockerfile}
+    restart: unless-stopped
+    environment:
+      ADMIN_GATE: ${ADMIN_GATE:-off}
+      ADMIN_USER: ${ADMIN_USER:-admin}
+      ADMIN_PASS: ${ADMIN_PASS:-}
+    ports: ["${FRONTEND_BIND:-127.0.0.1}:${FRONTEND_PORT:-8501}:80"]
+    depends_on:
+      backend: {condition: service_healthy}
+volumes:
+  pg_data:

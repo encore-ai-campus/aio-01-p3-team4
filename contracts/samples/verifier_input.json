@@ -1,0 +1,45 @@
+{
+  "task_id": "job-0012",
+  "from": "supervisor",
+  "to": "verifier",
+  "objective": "창구 또는 문구 검증",
+  "inputs": {
+    "mode": "channel",
+    "category": "streetlight",
+    "region": {
+      "sido": "서울특별시",
+      "sigungu": "동작구",
+      "dong": "상도동",
+      "place_text": "상도동 주민센터 앞"
+    },
+    "channels": [
+      {
+        "channel_id": "national-all-01",
+        "name": "국민신문고",
+        "org": "국민권익위원회",
+        "method": "web",
+        "url": "https://www.epeople.go.kr/",
+        "jurisdiction": "전국",
+        "verified_at": "2026-10-06",
+        "source_url": "https://www.epeople.go.kr/"
+      },
+      {
+        "channel_id": "national-all-02",
+        "name": "안전신문고",
+        "org": "행정안전부",
+        "method": "web",
+        "url": "https://www.safetyreport.go.kr/",
+        "jurisdiction": "전국",
+        "verified_at": "2026-10-06",
+        "source_url": "https://www.safetyreport.go.kr/"
+      }
+    ]
+  },
+  "constraints": [
+    "개인정보를 묻지 말 것",
+    "공식 출처만 사용할 것"
+  ],
+  "attempt": 1,
+  "last_failure": null,
+  "memory_refs": []
+}

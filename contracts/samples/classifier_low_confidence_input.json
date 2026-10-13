@@ -1,0 +1,16 @@
+{
+  "task_id": "job-sample-low_confidence",
+  "from": "supervisor",
+  "to": "classifier",
+  "objective": "민원 유형과 지역 파악",
+  "inputs": {
+    "text": "상도동 길에 뭔가 이상한 게 있어요"
+  },
+  "constraints": [
+    "개인정보를 묻지 말 것",
+    "공식 출처만 사용할 것"
+  ],
+  "attempt": 1,
+  "last_failure": null,
+  "memory_refs": []
+}

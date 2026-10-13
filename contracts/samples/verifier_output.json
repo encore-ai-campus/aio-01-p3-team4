@@ -1,0 +1,22 @@
+{
+  "task_id": "job-0012",
+  "author": "verifier",
+  "status": "success",
+  "data": {
+    "verdict": "PASS",
+    "checks": [
+      {
+        "name": "sample",
+        "ok": true,
+        "detail": "연결 검증용 고정 샘플; 실제 링크 검증은 미구현"
+      }
+    ],
+    "reasons": [],
+    "passed_channel_ids": [
+      "national-all-01",
+      "national-all-02"
+    ]
+  },
+  "failure": null,
+  "incident_id": null
+}

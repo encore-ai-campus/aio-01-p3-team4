@@ -1,0 +1,44 @@
+name: discord-notify
+description: 워크플로우 결과를 팀 디스코드 #배포알림 채널에 보냅니다. 시크릿 DISCORD_WEBHOOK_URL이 비어 있으면 조용히 건너뜁니다.
+inputs:
+  webhook:
+    description: 디스코드 웹훅 URL (secrets.DISCORD_WEBHOOK_URL)
+    required: true
+  service:
+    description: 서비스 이름 (backend, frontend, ...)
+    required: true
+  result:
+    description: success / failure / cancelled
+    required: true
+  stage:
+    description: 어디까지 했는지 (예 "테스트", "테스트·배포")
+    required: false
+    default: 테스트
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      env:
+        WEBHOOK: ${{ inputs.webhook }}
+        SERVICE: ${{ inputs.service }}
+        RESULT: ${{ inputs.result }}
+        STAGE: ${{ inputs.stage }}
+        BRANCH: ${{ github.ref_name }}
+        ACTOR: ${{ github.actor }}
+        MSG: ${{ github.event.head_commit.message }}
+        SHA: ${{ github.sha }}
+        RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+      run: |
+        if [ -z "$WEBHOOK" ]; then echo "DISCORD_WEBHOOK_URL 없음 — 알림 건너뜀"; exit 0; fi
+        case "$RESULT" in
+          success)   ICON="✅"; WORD="성공"; COLOR=3066993 ;;
+          cancelled) ICON="⚪"; WORD="취소"; COLOR=9807270 ;;
+          *)         ICON="❌"; WORD="실패"; COLOR=15158332 ;;
+        esac
+        TITLE="$ICON [$SERVICE] $STAGE $WORD"
+        FIRST_LINE=$(printf '%s' "$MSG" | head -n1 | cut -c1-120)
+        printf -v DESC '브랜치 `%s` · 커밋 `%s` · %s\n%s\n[실행 로그 보기](%s)' "$BRANCH" "${SHA:0:7}" "$ACTOR" "$FIRST_LINE" "$RUN_URL"
+        jq -n --arg t "$TITLE" --arg d "$DESC" --argjson c "$COLOR" \
+          '{embeds:[{title:$t, description:$d, color:$c}]}' \
+          | curl -sS -f -H 'Content-Type: application/json' -d @- "$WEBHOOK" >/dev/null \
+          && echo "디스코드 알림 전송: $TITLE"

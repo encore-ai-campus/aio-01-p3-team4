@@ -1,0 +1,16 @@
+{
+  "task_id": "job-sample-blocked",
+  "author": "mailer",
+  "status": "failed",
+  "data": {
+    "message_id": null,
+    "to": "citizen@minwon.test",
+    "dept": "국민신문고 민원처리과(가상)",
+    "officer": "김가상 주무관",
+    "status": "blocked",
+    "receipt_no": null,
+    "attempts": 0
+  },
+  "failure": "MAIL_BLOCKED",
+  "incident_id": null
+}

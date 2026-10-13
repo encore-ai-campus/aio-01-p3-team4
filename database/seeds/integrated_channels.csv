@@ -1,0 +1,9 @@
+channel_id,sido,sigungu,category,name,org,method,url,jurisdiction,verified_at,source_url,active
+seoul-all-01,서울특별시,,all,서울시 응답소,서울특별시,web,https://eungdapso.seoul.go.kr/,서울특별시,2026-10-07,https://gov.seoul.go.kr/apc/communication/traffic-inconvenience-smart-report,true
+seoul-all-02,서울특별시,,all,120다산콜센터 전화(서울시·25개 자치구 민원 상담),서울특별시 120다산콜재단,phone,tel:02-120,서울특별시,2026-10-07,https://www.120dasan.or.kr/dsnc/main/contents.do?menuNo=200016,true
+seoul-all-03,서울특별시,,all,120다산콜 실시간 채팅 안내(생활불편신고 접수 시 본인인증 필요),서울특별시 120다산콜재단,web,https://www.120dasan.or.kr/dsnc/main/contents.do?menuNo=200106,서울특별시,2026-10-07,https://www.120dasan.or.kr/dsnc/main/contents.do?menuNo=200106,true
+seoul-road_damage-01,서울특별시,,road_damage,서울 스마트 불편신고(도로 파손),서울특별시,web,https://smartreport.seoul.go.kr/w100/index.do,서울특별시,2026-10-07,https://smartreport.seoul.go.kr/w100/w143.do,true
+seoul-illegal_dumping-01,서울특별시,,illegal_dumping,서울 스마트 불편신고(쓰레기 무단투기),서울특별시,web,https://smartreport.seoul.go.kr/w100/index.do,서울특별시,2026-10-07,https://smartreport.seoul.go.kr/w100/w143.do,true
+national-all-01,,,all,국민신문고,국민권익위원회,web,https://www.epeople.go.kr/,전국,2026-10-07,https://www.epeople.go.kr/,true
+national-all-02,,,all,안전신문고,행정안전부,web,https://www.safetyreport.go.kr/,전국,2026-10-07,https://www.safetyreport.go.kr/,true
+national-all-03,,,all,국민콜110 전화(정부민원 상담·담당기관 안내),국민권익위원회 정부민원안내콜센터,phone,tel:110,전국,2026-10-07,https://www.110.go.kr/consult/manual.do,true

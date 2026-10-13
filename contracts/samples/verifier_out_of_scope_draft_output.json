@@ -1,0 +1,29 @@
+{
+  "task_id": "job-sample-out_of_scope_draft",
+  "author": "verifier",
+  "status": "success",
+  "data": {
+    "verdict": "PASS",
+    "checks": [
+      {
+        "name": "pii",
+        "ok": true,
+        "detail": "개인정보 없음"
+      },
+      {
+        "name": "region",
+        "ok": true,
+        "detail": "지역 일치"
+      },
+      {
+        "name": "links",
+        "ok": true,
+        "detail": "문구 링크 공식 주소"
+      }
+    ],
+    "reasons": [],
+    "passed_channel_ids": []
+  },
+  "failure": null,
+  "incident_id": null
+}
